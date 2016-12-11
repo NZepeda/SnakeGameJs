@@ -20,7 +20,7 @@ function Snake(){
 	}
 
 	this.show = function(){
-		fill(255);
+		fill(0,128,0);
 
 		for(var i = 0; i < this.total; i++){
 			rect(this.tail[i].x, this.tail[i].y, canvasScale, canvasScale);
@@ -40,6 +40,7 @@ function Snake(){
 		if(pixDistance < 1){
 			this.total++;
 			pickFoodLocation();
+			updateScore(this.total);
 		}
 	}
 
@@ -59,10 +60,38 @@ function Snake(){
 			var bodyDistance = dist(this.x, this.y, pos.x, pos.y);
 
 			if(bodyDistance < 1){
+				var finalScore = this.total;
 				this.total = 0;
 				this.tail = [];
+
+				gameOverAlert(finalScore);
 			}
 		}
 	}
 
+}
+
+function updateScore(score){
+	var gameScore = document.getElementById('game-score');
+
+	gameScore.innerHTML = score;
+}
+
+function gameOverAlert(finalScore){
+	gameIsStarted = false;
+
+	swal({
+  		title: "Game Over!",
+  		text: "Your final score was " + finalScore,
+  		type: "warning",
+  		showCancelButton: false,
+  		confirmButtonColor: "red",
+  		confirmButtonText: "Try Again",
+  		closeOnConfirm: true,
+  		customClass: ".startGameModal"
+	},
+	function(){
+  		startGame();
+  		updateScore(0);
+	});
 }

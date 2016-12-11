@@ -1,10 +1,17 @@
 var snake;
 var food;
 var canvasScale = 20;
-
+var gameIsStarted = false;
 
 function setup(){
-	createCanvas(600, 600);
+
+	startMessage();
+}
+
+function startGame(){
+	gameIsStarted = true;
+	var canvas = createCanvas(1200, 550);
+	canvas.parent('sketch-holder');
 	snake = new Snake();
 
 	// Reduce frame rate to emulate old school snake game
@@ -12,7 +19,6 @@ function setup(){
 
 	// create the food (refactor this out later)
 	pickFoodLocation();
-
 }
 
 function pickFoodLocation(){
@@ -25,17 +31,21 @@ function pickFoodLocation(){
 }
 
 function draw(){
-	background(51);
-	snake.death();
-	snake.update();
-	snake.show();
 
-	// Food stuff goes here
-	fill(255, 0, 100);
-	rect(food.x, food.y, canvasScale, canvasScale);
+	if(gameIsStarted){
+		background(30);
+		snake.death();
+		snake.update();
+		snake.show();
 
-	// EAT THE FOOD
-	snake.eat(food);
+		// Food stuff goes here
+		fill(0);
+		rect(food.x, food.y, canvasScale, canvasScale);
+
+		// EAT THE FOOD
+		snake.eat(food);
+	}
+	
 }
 
 function keyPressed(){
@@ -51,4 +61,20 @@ function keyPressed(){
 	else if(keyCode === RIGHT_ARROW){
 		snake.changeDirection(1, 0);
 	}
+}
+
+function startMessage(){
+	swal({
+  		title: "Ready to play!?",
+  		text: "",
+  		type: "info",
+  		showCancelButton: false,
+  		confirmButtonColor: "green",
+  		confirmButtonText: "Yes!",
+  		closeOnConfirm: true,
+  		customClass: ".startGameModal"
+	},
+	function(){
+  		startGame();
+	});
 }

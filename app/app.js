@@ -7,11 +7,12 @@ var app = express();
 var dirname = __dirname.slice(0, (__dirname.length - 3));
 app.get('/', function(req, res){
 	res.sendFile(dirname + 'public/views/index.html');
-	console.log(__dirname);
 });
 
 
 app.use('/js', express.static(dirname + "public/js/"));
+app.use('/css', express.static(dirname + "public/css/"));
+app.use('/swal', express.static(dirname + "node_modules/sweetalert/dist/"));
 
 // logging middleware
 var num = 0;
