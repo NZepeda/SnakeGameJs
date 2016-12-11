@@ -2,6 +2,7 @@
   "name": "@nzepeda/SnakeJs",
   "version": "1.0.0",
   "description": "Snake game created using the P5 js framework",
+  "start": "node app.js",
   "main": "index.js",
   "author": "",
   "license": "ISC",
