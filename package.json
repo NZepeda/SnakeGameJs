@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Snake game created using the P5 js framework",
   "scripts": {
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "main": "index.js",
   "author": "",
